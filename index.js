@@ -24,12 +24,18 @@ async function run() {
       await client.connect()
       const database = client.db('destinoDB')
       const destinoCollection = database.collection('services')
+      const destinoGallaryCollection = database.collection('gallary')
 
       // GET API
       app.get('/services', async (req, res) => {
          const cursor = destinoCollection.find({})
          const services = await cursor.toArray()
          res.send(services)
+      })
+      app.get('/gallary', async (req, res) => {
+         const cursor = destinoGallaryCollection.find({})
+         const images = await cursor.toArray()
+         res.send(images)
       })
 
       // GET Single Service
@@ -47,6 +53,14 @@ async function run() {
          console.log('hit the post api', service)
 
          const result = await destinoCollection.insertOne(service)
+         console.log(result)
+         res.json(result)
+      })
+      app.post('/gallary', async (req, res) => {
+         const gallary = req.body
+         console.log('hit the post api', gallary)
+
+         const result = await destinoGallaryCollection.insertOne(gallary)
          console.log(result)
          res.json(result)
       })
