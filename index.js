@@ -68,6 +68,9 @@ run().catch(console.dir)
 app.get('/', (req, res) => {
    res.send('Running Destino Server')
 })
+app.get('/home', (req, res) => {
+   res.send('Running Destino Server homeeeee')
+})
 
 
 app.listen(port, () => {
