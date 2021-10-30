@@ -44,6 +44,11 @@ async function run() {
          const testimony = await cursor.toArray()
          res.send(testimony)
       })
+      app.get('/myBookings', async (req, res) => {
+         const cursor = destinoBookingCollection.find({})
+         const mybookings = await cursor.toArray()
+         res.send(mybookings)
+      })
 
       // GET Single Service
       app.get('/services/:id', async (req, res) => {
