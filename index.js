@@ -96,10 +96,12 @@ async function run() {
       app.put('/bookings/:id', async (req, res) => {
          const id = req.params.id
          const query = { _id: ObjectId(id) }
-          const result = await destinoBookingCollection.updateOne(query, { $set: { "status": "Accepted" } })
+         const result = await destinoBookingCollection.updateOne(query, {
+            $set: { status: 'Accepted' },
+         })
          res.json(result)
       })
-      
+
       // DELETE API
       app.delete('/services/:id', async (req, res) => {
          const id = req.params.id
