@@ -85,14 +85,21 @@ async function run() {
          res.json(result)
       })
       app.post('/bookings', async (req, res) => {
-         const bookings= req.body
+         const bookings = req.body
          console.log('hit the post api', bookings)
 
          const result = await destinoBookingCollection.insertOne(bookings)
          console.log(result)
          res.json(result)
       })
-
+      //Put api
+      app.put('/bookings/:id', async (req, res) => {
+         const id = req.params.id
+         const query = { _id: ObjectId(id) }
+          const result = await destinoBookingCollection.updateOne(query, { $set: { "status": "Accepted" } })
+         res.json(result)
+      })
+      
       // DELETE API
       app.delete('/services/:id', async (req, res) => {
          const id = req.params.id
@@ -119,7 +126,6 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
    res.send('Running Destino Server homeeeee')
 })
-
 
 app.listen(port, () => {
    console.log('Running destino Server on port', port)
