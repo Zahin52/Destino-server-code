@@ -26,6 +26,7 @@ async function run() {
       const destinoCollection = database.collection('services')
       const destinoGallaryCollection = database.collection('gallary')
       const destinoTestimonyCollection = database.collection('testimony')
+      const destinoBookingCollection = database.collection('bookings')
 
       // GET API
       app.get('/services', async (req, res) => {
@@ -75,6 +76,14 @@ async function run() {
          console.log('hit the post api', testimony)
 
          const result = await destinoTestimonyCollection.insertOne(testimony)
+         console.log(result)
+         res.json(result)
+      })
+      app.post('/bookings', async (req, res) => {
+         const bookings= req.body
+         console.log('hit the post api', bookings)
+
+         const result = await destinoBookingCollection.insertOne(bookings)
          console.log(result)
          res.json(result)
       })
