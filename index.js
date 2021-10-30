@@ -25,6 +25,7 @@ async function run() {
       const database = client.db('destinoDB')
       const destinoCollection = database.collection('services')
       const destinoGallaryCollection = database.collection('gallary')
+      const destinoTestimonyCollection = database.collection('testimony')
 
       // GET API
       app.get('/services', async (req, res) => {
@@ -36,6 +37,11 @@ async function run() {
          const cursor = destinoGallaryCollection.find({})
          const images = await cursor.toArray()
          res.send(images)
+      })
+      app.get('/testimony', async (req, res) => {
+         const cursor = destinoTestimonyCollection.find({})
+         const testimony = await cursor.toArray()
+         res.send(testimony)
       })
 
       // GET Single Service
@@ -61,6 +67,14 @@ async function run() {
          console.log('hit the post api', gallary)
 
          const result = await destinoGallaryCollection.insertOne(gallary)
+         console.log(result)
+         res.json(result)
+      })
+      app.post('/testimony', async (req, res) => {
+         const testimony = req.body
+         console.log('hit the post api', testimony)
+
+         const result = await destinoTestimonyCollection.insertOne(testimony)
          console.log(result)
          res.json(result)
       })
