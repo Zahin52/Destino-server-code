@@ -96,7 +96,9 @@ async function run() {
       app.put('/bookings/:id', async (req, res) => {
          const id = req.params.id
          const query = { _id: ObjectId(id) }
-         const result = await destinoBookingCollection.updateOne(query)
+         const result = await destinoBookingCollection.updateOne(query, {
+            $set: { status: 'Accepted' },
+         })
          res.json(result)
       })
 
