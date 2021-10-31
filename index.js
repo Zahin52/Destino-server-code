@@ -28,7 +28,7 @@ async function run() {
       const destinoTestimonyCollection = database.collection('testimony')
       const destinoBookingCollection = database.collection('bookings')
 
-      // GET API
+      // All GET API
       app.get('/services', async (req, res) => {
          const cursor = destinoCollection.find({})
          const services = await cursor.toArray()
@@ -59,7 +59,7 @@ async function run() {
          res.json(service)
       })
 
-      // POST API
+      // All POST API
       app.post('/services', async (req, res) => {
          const service = req.body
          console.log('hit the post api', service)
@@ -92,7 +92,8 @@ async function run() {
          console.log(result)
          res.json(result)
       })
-      //Put api
+       
+      //All PUT API
       app.put('/bookings/:id', async (req, res) => {
          const id = req.params.id
          const query = { _id: ObjectId(id) }
@@ -102,7 +103,7 @@ async function run() {
          res.json(result)
       })
 
-      // DELETE API
+      //All DELETE API
       app.delete('/services/:id', async (req, res) => {
          const id = req.params.id
          const query = { _id: ObjectId(id) }
@@ -122,12 +123,12 @@ async function run() {
 
 run().catch(console.dir)
 
+// Server checking 
+
 app.get('/', (req, res) => {
    res.send('Running Destino Server')
 })
-app.get('/home', (req, res) => {
-   res.send('Running Destino Server homeeeee')
-})
+
 
 app.listen(port, () => {
    console.log('Running destino Server on port', port)
